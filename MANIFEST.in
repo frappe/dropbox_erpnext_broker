@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include dropbox_erpnext_broker *.css
+recursive-include dropbox_erpnext_broker *.csv
+recursive-include dropbox_erpnext_broker *.html
+recursive-include dropbox_erpnext_broker *.ico
+recursive-include dropbox_erpnext_broker *.js
+recursive-include dropbox_erpnext_broker *.json
+recursive-include dropbox_erpnext_broker *.md
+recursive-include dropbox_erpnext_broker *.png
+recursive-include dropbox_erpnext_broker *.py
+recursive-include dropbox_erpnext_broker *.svg
+recursive-include dropbox_erpnext_broker *.txt
+recursive-exclude dropbox_erpnext_broker *.pyc
