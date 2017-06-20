@@ -1,6 +1,6 @@
 import frappe
-import requests
 from frappe import _
+from frappe.integrations.utils import make_post_request
 from frappe.integrations.doctype.dropbox_settings.dropbox_settings import (get_dropbox_authorize_url,
 	dropbox_auth_finish)
 
@@ -31,8 +31,15 @@ def update_access_token_to_site(access_token, state):
 	token_details = frappe.get_doc("Site Dropbox Token", state)
 	
 	url = "{0}/api/method/frappe.integrations.doctype.dropbox_settings.dropbox_settings.set_dropbox_access_token".format(token_details.site_name)
-	res = requests.post(url, data={"access_token": access_token})
-	
+
+	try:
+		res = make_post_request(url, data={"access_token": access_token})
+	except Exception as e:
+		frappe.respond_as_web_page(_("Dropbox Setup"),
+			_("Something went wrong while creating dropbox access token. Please try again!!") + close,
+			indicator_color='red')
+
 	frappe.respond_as_web_page(_("Dropbox Setup"),
 		_("Dropbox access is approved!") + close,
 		indicator_color='green')
+
